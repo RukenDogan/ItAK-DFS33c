@@ -13,18 +13,18 @@ Vous disposez maintenant de votre propre dépôt dans lequel vous pouvez dépose
 ```shell
 git clone -b main <url copiée>
 cd <dossier créé>
-git remote add upstream git@github.com:Nyxis/ItAK-DFS<votre numéro de session>.git
+git remote add prof git@github.com:Nyxis/ItAK-DFS<votre numéro de session>.git
 ```
 
 3/ Effectuez les exercices du module dans une branche créée à partir du main du dépôt principal
 ```shell
 # création de la branche
-git branch module_Dxx upstream/main
+git branch module_Dxx prof/main
 git checkout module_Dxx
 
 # récupération de la dernière version des exercices
 git checkout main
-git pull --rebase upstream main
+git pull --rebase prof main
     # résolvez les éventuels conflits
     git add <fichiers de conflits résolus>
     git rebase --continue
