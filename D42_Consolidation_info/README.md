@@ -1,6 +1,6 @@
 # D42 - Consolidation des compétences en développement informatique
 
-# Écoute et distribution des requêtes HTTP avec Apache
+## Écoute et distribution des requêtes HTTP avec Apache
 
 Pour appliquer le concept d'automatisation vus en cours, nous allons créer un pont entre une requête HTTP et un exécutable sur votre ordinateur.
 
@@ -31,4 +31,4 @@ Importez maintenant votre TP du module D12 dans votre dossier `public` et visual
 
 Utilisez maintenant la directive `ErrorDocument` pour personnaliser vos pages d'erreur.
 
-
+## Création de pages web dynamiques avec Php
