@@ -11,7 +11,7 @@ Pour appliquer le concept d'automatisation vus en cours, nous allons créer un p
 Pour ce faire, nous utiliserons Apache via Docker sur votre machine locale.
 
 Commencez par vérifier l'installation de Docker dans votre espace de travail.
-Une fois celui-ci installé si nécessaire, ouvrez une ligne de commande puis créez un dossier `~/Workspace/D42` et ouvrez-le.
+Une fois celui-ci installé si nécessaire, ouvrez une ligne de commande puis créez un dossier `Workspace/D42` et ouvrez-le.
 
 Dans ce dossier, lancez un container Apache avec la ligne suivante :
 ```shell
@@ -22,7 +22,7 @@ docker run -d --name apache -p 81:80 \
 ```
 Sous Windows, utilisez PowerShell :
 ```shell
-docker run -d --name apache -p 81:80 -v "$(PWD)\vhosts:/etc/apache2/sites-enabled:ro" -v "$(PWD)\public:/var/www/html:ro " php:apache
+docker run -d --name apache -p 81:80 -v "$(PWD)\vhosts:/etc/apache2/sites-enabled:ro" -v "$(PWD)\public:/var/www/html:ro" php:apache
 ```
 
 Le dossier `public` va contenir les fichiers "servis" par Apache via le protocole HTTP.
@@ -52,3 +52,44 @@ Dans un premier temps, nous allons permettre à Apache de lancer le moteur d'int
 Nous devons maintenant ajouter la directive qui donne à Apache la possibilité d'appeler Php. Dans la configuration, nous allons appeler le module interne de Apache dédié à Php (un handler) via la configuration `SetHandler application/x-httpd-php`. Attention, il ne doit s'activer que si le fichier demandé termine par `.php`; vous devrez utiliser une directive de filtre pour ce faire.
 
 Ajoutez le fichier [main.php](./public/main.php) dans votre navigateur. Si le serveur a bien été paramétré, le code sera interprété et vous verrez le titre "Hello There".
+
+Pour continuer, nous allons utiliser des paramètres d'url pour modifier la page et saluer quelqu'un d'autre.
+Accédez à la page [main.php](http://localhost:81/main.php?who=Nyx). Les paramètres passés dans l'url sont disponibles dans la variable superglobale `$_GET`. Utilisez cette variable pour afficher la valeur du paramètre `who` dans le h1.
+Intégrez ensuite le code suivant pour contrôler le paramètre du salut grâce aux liens :
+```html
+<ul>
+    <li><a href="https://www.planetegrandesecoles.com/wp-content/uploads/2023/08/anne.jpg.webp">Anne</a></li>
+    <li><a href="https://upload.wikimedia.org/wikipedia/commons/3/30/EVA_GREEN_CESAR_2020.jpg">Eva</a></li>
+</ul>
+```
+
+Utilisez maintenant les paramètres d'url pour afficher les données d'un produit.
+Prenez en paramètre le numéro d'un produit, puis affichez les informations produit sur votre page. Vous veillerez à afficher les prix en € et pas en centimes; et à gérer les possibles erreurs.
+
+Tips :
+```php
+// afficher un sous-éléments d'un objet
+<?= $product->title ?>
+
+// accéder à un élément donné d'une collection (un tableau)
+$product = $productCollection[1];
+
+// tester si une variable existe et n'est pas vide
+if (empty($maVarPeutEtreVide)) {
+}
+
+// changer le code de réponse et rediriger vers une autre page
+header("HTTP/1.1 XXX .......");
+header("Location: url_de_la_page.html");
+exit();
+```
+
+Reprenez la liste précédente pour afficher des liens vers les informations produits.
+Tips :
+```php
+<li><a href="......"><?= $product->title ?></a>
+
+foreach ($productCollection as $x => $y) {
+    var_dump(x, y);
+}
+```
