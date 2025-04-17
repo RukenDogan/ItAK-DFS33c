@@ -120,12 +120,51 @@ Il va maintenant être nécessaire de dire au container d'Apache d'appeler le co
 
 Modifiez le fichier `localhost.conf` pour que chaque appel de fichier .php soit soit envoyé au container de Php en utilisant le handler `proxy:fcgi:`. Notez que :
  - Docker publie le nom des containers en tant que nom de domaine à l'intérieur de son réseau interne
- - L'image `php:8.4-fpm` écoute les requêtes sur le port 3000
+ - L'image `php:8.4-fpm` écoute les requêtes sur le port 9000
 
 Exécutez maintenant votre fichier `src/main.php` à travers votre serveur.
 
+# Utilisation de mémoires distantes via HTTP
 
+Nous allons maintenant lire une source de données distante pour nos produits.
+Créez un dossier `public/api` dans votre projet puis collez le fichier .csv proposé [ici](./public/api/products.csv).
+Il doit être accessible à l'adresse suivante : http://localhost:81/api/products.csv.
 
+Nous allons ensuite utiliser du code Open Source pour charger cette liste via protocole HTTP, et convertir le .csv en éléments utilisable pour notre template.
 
+Les librairies Open Source en Php se chargent à l'aide de l'outil Composer.
+Comme tout nouvel outil, ajoutez un nouveau container à votre `docker-compose.yml` qui pointe l'image `composer:latest`. Pour permettre aux librairies d'être accessible au code Php, nous allons devoir également partager le dossier `src` avec le dossier `app` du container.
 
+Recrééez vos containers puis pour vérifier l'installation puis lancez la commande :
+```shell
+docker compose exec --rm composer init
+```
+Notez que toutes les commandes Composer se lanceront maintenant de la même façon.
+Ajoutez maintenant le fichier d'autoload de composer à votre code :
+```php
+    // src/main.php
+    require_once(dirname(__FILE__).'/vendor/autoload.php');
+```
+
+Pour commencer, nous allons utiliser la librairie Guzzle pour lire le fichier .csv à distance, via un appel HTTP.
+Installez la librairie via Composer, puis vous pourrez l'utiliser pour lancer un appel vers le fichier `product.csv`. Attention, notez bien que "localhost" défini la machine à l'origine de l'appel. Par contre en interne, Docker vous donne accès à une serveur DNS pour adresser les différents containers depuis les autres grâce à leur nom.
+
+Tips :
+```php
+    $csv = new GuzzleHttp\Client(['timeout'  => 5.0])
+        ->get('http://........../api/products.csv')
+        ->getBody()
+        ->getContents()
+    ;
+```
+
+Utilisez maintenant la librairie https://csv.thephpleague.com/ pour lire la chaine csv à la place du tableau de produits de l'exercice précédent.
+Tips :
+```php
+    $csv = League\Csv\Reader::createFromString(/* ...... */);
+    $csv->setHeaderOffset(0);
+
+    $csv->getRecords();
+    $csv->nth(/* 1,2,3....,X */);
+```
 
