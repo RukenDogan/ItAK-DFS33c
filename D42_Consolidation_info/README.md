@@ -93,3 +93,39 @@ foreach ($productCollection as $x => $y) {
     var_dump(x, y);
 }
 ```
+
+## Docker multi-container
+
+La bonne pratique avec Docker consiste à créer un container par technologie pour maintenir une isolation des systèmes.
+Dans l'exercice précédent, nous avons utilisé Apache et Php mais dans le même container. Nous allons maintenant en utiliser des différents et les faire communiquer.
+
+Afin de créer et gérer facilement plusieurs containers, Docker propose la sous directive `compose` qui permet de définir à l'avance les containers à utiliser via un fichier de configuration.
+
+Pour commencer, créons un dossier `src/` qui va contenir tout le code Php, déplacez-y votre `main.php`.
+Créez ensuite votre fichier `docker-compose.yml` à partir du [modèle proposé](./docker-compose.yml) et le fichier `vhost/httpd.conf` à partir de celui proposé [ici](./vhosts/httpd.conf).
+Retirez ensuite le handler Php de votre vhost, et détruisez tous vos anciens containers.
+
+Dans le fichier `docker-compose.yml`, créez un service du nom de votre choix basé sur l'image `httpd:latest`.
+Référencez lui les mêmes réglages de ports, mais adaptez les volumes pour :
+ - ajouter votre fichier `localhost.conf` dans le dossier `/usr/local/apache2/conf/vhosts`
+ - ajouter le fichier `httpd.conf` dans le dossier `/usr/local/apache2/conf/`
+ - publier le dossier `public` dans le DocumentRoot de votre VHost
+
+Lancez maintenant votre composition avec la commande `docker compose up --build -d`.
+Rendez-vous sur votre navigateur pour vérifier si votre installation fonctionne : votre `index.html` doit être accessible à l'adresse http://localhost:81/.
+
+Créons maintenant un container pour exécuter Php dans un environnement isolé.
+Basez vous sur l'image `php:8.4-fpm`, et créez un volume avec votre dossier `src` vers `/var/www/html`.
+Il va maintenant être nécessaire de dire au container d'Apache d'appeler le container de Php dans le cas où les fichiers requis sont en .php.
+
+Modifiez le fichier `localhost.conf` pour que chaque appel de fichier .php soit soit envoyé au container de Php en utilisant le handler `proxy:fcgi:`. Notez que :
+ - Docker publie le nom des containers en tant que nom de domaine à l'intérieur de son réseau interne
+ - L'image `php:8.4-fpm` écoute les requêtes sur le port 3000
+
+Exécutez maintenant votre fichier `src/main.php` à travers votre serveur.
+
+
+
+
+
+
