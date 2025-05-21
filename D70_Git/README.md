@@ -86,7 +86,7 @@ Vous ne disposerez cependant pas des droits en écriture sur ce dépôt comme c'
 Pour commencer, créer votre compte sur Github avec votre adresse @it-students.
 Pour sécuriser vos échanges avec les serveurs Github, nous allons y référencer votre clé publique, générée précédemment. Dans votre profil (Settings / SSH & GPG keys), ajoutez le contenu de la clé publique (`cat <votre workspace>/.ssh/it_akademy_rsa.pub`).
 
-Rendez-vous à la racine du projet : https://github.com/Nyxis/ItAK-DFS33c; puis suivez les étapes 1 & 2 de la documentation "Livrez votre travail".
+Rendez-vous à la racine du projet : https://github.com/Nyxis/ItAK-DFS33c; puis suivez les étapes 1 & 2 de la documentation "[livrez votre travail](../docs/workflow.md)".
 
 Vous disposez maintenant d'un dépôt local capable d'échanger avec votre fork. Pour pouvoir publier des modifications dessus, vous devez néanmoins authentifier vos appels les configurations de votre dépôt.
 Votre authentification passera par 3 configurations : Nom, Email et clé privée.
@@ -115,13 +115,13 @@ Testez que vos configurations sont correctes via `git fetch -a -p`.
 
 ### Votre premier commit
 
-Effectuez l'étape 3 de la documentation "Livrez votre travail".
+Effectuez l'étape 3 de la documentation "[livrez votre travail](../docs/workflow.md)".
 Votre copie est maintenant à jour à partir du dépôt principal.
 
 Ajoutez l'image `pedro_panic.webp` ci-dessous :
 ![pas Pedro :(](...........)
 
-Effectuez l'étape 4 puis 5 de la documentation "Livrez votre travail".
+Effectuez l'étape 4 puis 5 de la documentation "[livrez votre travail](../docs/workflow.md)".
 
 ### Et votre premier conflit
 
@@ -141,4 +141,4 @@ Attention, dans le cas d'un rebase, la commande de résolution ne sera pas la m�
 ## En cas réel
 
 Reprenez le code Php produit dans le module AD24.
-Livrez le dans ce dépôt en respectant la procédure "Livrez votre travail", dans le dossier correspondant.
+Livrez le dans ce dépôt en respectant la procédure "[livrez votre travail](../docs/workflow.md)", dans le dossier correspondant.
