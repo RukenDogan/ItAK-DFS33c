@@ -10,6 +10,8 @@ Pour déposer vos développements et livrables en général, vous devez suivre l
 ## Sommaire des exercices
 
   - [D42 - Consolidation des connaissances en informatique](D42_Consolidation_info/README.md)
+  - [AD24 - Modélisation UML](AD24_Modelisation_POO/README.md)
+  - [D70 - Git - Versioning](D70_Git/README.md)
 
 ## Documentation
 
