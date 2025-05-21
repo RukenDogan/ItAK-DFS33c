@@ -21,13 +21,19 @@ build/*
 *.tar
 *.zip
 
+
+# Extra libs / vendors #
+########################
+node_modules
+vendor
+
 # Logs #
-######################
+########
 *.log
 logs/*
 
 # Caches #
-######################
+##########
 .cache
 cache/*
 
@@ -41,8 +47,8 @@ cache/*
 ehthumbs.db
 Thumbs.db
 
-### Custom files metadata
-###################
+# Custom files metadata #
+########################
 .php_cs.cache
 .vscode
 .idea
