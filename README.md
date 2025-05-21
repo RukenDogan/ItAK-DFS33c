@@ -1,6 +1,6 @@
-# ItAK-DFS31C
+# ItAK-DFS33c
 
-Dépôt support aux rendus d'exercices pour la session DFS31C de l'IT-Akademy.
+Dépôt support aux rendus d'exercices pour la session DFS33c de l'IT-Akademy.
 
 Dans ce dépôt, vous trouverez les ressources utiles évoquées en cours ainsi que les consignes des différents exercices, et éventuellement leur correction.
 
