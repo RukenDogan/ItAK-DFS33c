@@ -5,15 +5,22 @@
 - Create a new fork
 Vous disposez maintenant de votre propre dépôt dans lequel vous pouvez déposer tout votre code. Veillez à laisser votre dépôt public.
 
-2/ Clonez votre dépôt sur votre machine via SSH.
+2/ Clonez votre dépôt sur votre machine via HTTPS.
 - <> Code ⏷
-- SSH
-- Copiez l'adresse git@github.com:xxxxxxxx/ItAK-DFSyyyyyy.git)
+- HTTPS
+- Copiez l'adresse https://github.com/........./ItAK-DFS.....git)
 
 ```shell
 git clone -b main <url copiée> <nom dossier à créer>
 cd <nom dossier à créer>
 git remote add prof git@github.com:Nyxis/ItAK-DFS<votre numéro de session>.git
+```
+
+Cloner votre dépôt via HTTPS présente un défaut : votre mot de passe est prompt à chaque push, ce qui n'est ni ergonomique ni sécurisant; Github a même déprécié cette authentification.
+
+Pour passer à SSH, nous allons mettre à jour le remote. Retrouvez l'adresse SSH, elle ressemble à `git@github.com:......../ItAK-DFS........git`). Lancez ensuite :
+```shell
+git remote set-url origin <url copiée>
 ```
 
 3/ Effectuez les exercices du module dans une branche créée à partir du main du dépôt principal

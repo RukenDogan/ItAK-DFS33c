@@ -86,7 +86,8 @@ Pour tous les travaux pratiques à venir, nous allons utiliser ce dépôt Github
 
 Vous ne disposerez cependant pas des droits en écriture sur ce dépôt comme c'est souvent le cas, en particulier quand on travaille en Open Source. Vos modifications passeront par des "propositions de modifications", via la mécanique de "fork" de Github, qui permet de faire une copie d'un dépôt vers votre espace personnel pour implémenter vos fonctionnalités sans impacter le dépôt original.
 
-Pour commencer, créer votre compte sur Github avec votre adresse @it-students.
+Pour commencer, créez votre compte sur Github avec votre adresse @it-students, ou ajoutez votre email @it-students à votre compte.
+
 Pour sécuriser vos échanges avec les serveurs Github, nous allons y référencer votre clé publique, générée précédemment. Dans votre profil (Settings / SSH & GPG keys), ajoutez le contenu de la clé publique (`cat <votre workspace>/.ssh/it_akademy_rsa.pub`).
 
 Rendez-vous à la racine du projet : https://github.com/Nyxis/ItAK-DFS33c; puis suivez les étapes 1 & 2 de la documentation "[livrez votre travail](../docs/workflow.md)".
