@@ -123,7 +123,10 @@ Effectuez l'étape 3 de la documentation "[livrez votre travail](../docs/workflo
 Votre copie est maintenant à jour à partir du dépôt principal.
 
 Ajoutez l'image `pedro_panic.webp` ci-dessous :
-![Pedro <3](pedro_panic.webp)
+HEAD
+
+![Anne](./anne.webp)
+prof/merge_me
 
 Effectuez l'étape 4 puis 5 de la documentation "[livrez votre travail](../docs/workflow.md)".
 
