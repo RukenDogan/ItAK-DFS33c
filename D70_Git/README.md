@@ -4,6 +4,8 @@
 
 Effectuez les exercices des 4 premières parties de l'onglet "Principal" du sandbox Git https://learngitbranching.js.org/?locale=fr_FR.
 
+Effectuez ensuite les exercices de la partie "Remote".
+
 ## Setup propre de Git sur une machine
 
 Dans cet exercice, nous allons mettre en place des bonnes pratiques pour utiliser Git et Github, et plus généralement travailler rigoureusement.
@@ -12,7 +14,8 @@ Dans cet exercice, nous allons mettre en place des bonnes pratiques pour utilise
 
 En développement, nous utilisons beaucoup de petits programmes et logiciels pour nous simplifier le travail. Seulement, vu qu'ils sont pour la plupart open-source, les mises à jour sont régulières et importantes et comblent pour la plupart des failles de sécurité : il est donc nécessaire de les maintenir à jour.
 
-Chaque système propose son gestionnaire de paquets :
+Chaque système propose son gestionnaire de paquets, et nous allons les utiliser pour installer Git.
+
 **MacOS**
 [Homebrew](https://brew.sh/)
 ```bash
@@ -38,7 +41,7 @@ winget install --id Git.Git -e
 ### Créez un espace de travail
 
 Choisissez un dossier racine pour vos projets; ```~/Workspace/IT-Akademy``` est conseillé.
-Dans ce projet, créez les dossiers ```.git``` et ```.ssh```.
+Dans ce dossier, créez les dossiers ```.git``` et ```.ssh```.
 
 ### Sécurisation des accès aux dépots distants via SSH
 
@@ -142,3 +145,7 @@ Attention, dans le cas d'un rebase, la commande de résolution ne sera pas la m�
 
 Reprenez le code Php produit dans le module AD24.
 Livrez le dans ce dépôt en respectant la procédure "[livrez votre travail](../docs/workflow.md)", dans le dossier correspondant.
+
+Recommencez avec le code Javascript produit dans le module D2.
+
+Vous veillerez à bien ouvrir des Pull Requests différentes pour chaque module, et de ne pas mélanger le code des différents modules dans une branche.

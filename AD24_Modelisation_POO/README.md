@@ -5,7 +5,7 @@
 Dans le but d'animer une soirée de JdR, un Game Master emmène un ensemble de matériel pour gérer les tirages aléatoires conséquents aux choix des joueurs.
 
 À chaque action, le Game Master choisira au hasard l'un des éléments en sa possession pour tirer la valeur.
-Cette valeur pourra être une réussite, un échec, une réussite critique ou un fumble. Selon l'action, le taux de réussite, de critique et de fumble sera variable.
+Cette valeur pourra être une réussite, un échec, une réussite critique ou un fumble. Selon l'action, le taux de réussite, de critique et de fumble sera variable, il faudra donc générer un score de réussite en pourcentage pour chaque éléments et le comparer à l'échelle prédéfinie.
 
 1/ Modéliser une classe qui représente un résultat de tirage aléatoire.
 
@@ -27,29 +27,73 @@ Pour chaque type, calculez les statut en fonction de la valeur retrouvée :
  - Un GameMaster dispose d'un nombre de dés conséquents de différents types, de deux decks de cartes l'un de trois couleurs de et 18 valeurs, le deuxième de 4 couleurs de 13 valeurs, et de deux pièces.
  - un GameMaster peut effectuer des tirages via la méthode `pleaseGiveMeACrit`. Le GameMaster sélectionne l'une des instances de Dice / Deck et Coin au hasard et renvoie une constante correspondant au type de résultat.
 
-## Modélisation
+6/ Dans une vraie partie de JdR, les résulats ne sont pas fixes, ils sont souvent interprétés par le GameMaster en fonction d'un contexte. Modifiez votre classe de résultat afin qu'elle renvoie un score en pourcentage, puis déléguez la responsabilité de l'attribution du type de résultat (Critique / Succès / Echec / Fumble) à la classe GameMaster.
+
+```php
+class Result
+{
+    public private(set) int $score;
+
+    public function __construct(
+        public readonly int $value,
+        public readonly int $min = 0,
+        public readonly int $max,
+        public readonly int $median
+    ) {
+        $this->score = /* ..... */;
+    }
+}
+
+class GameMaster
+{
+    /* ... */
+    public function pleaseGiveMeACrit() : Outcome
+    {
+        /* ... */
+        $result = /* .... */;
+
+        return match (true) {
+            $result /* .... */ => Outcome::SUCCESS,
+            /* ..... => ......, */
+        }
+    }
+}
+```
+
+7/ Une partie de JdR se déroule en une succession de rencontres appelée Scenario, que les joueurs affrontent en utilisant diverses techniques. En fonction de la rencontre, le taux de réussite (critique, etc...) peut varier : il est par exemple plus facile d'obtenir des succès contre un gobelin que contre un dragon.
+Matérialisez les classes correspondantes puis adaptez le GameMaster pour qu'il puisse résoudre une Rencontre, à la place de simplement tirer un résultat.
+
+8/ Assemblez tous vos objets pour créer un fichier d'amorçage (`main.php` ou `index.php`) et lancer votre programme pour qu'il résolve un scénario de 5 rencontres, en suivant les règles suivantes :
+ - en cas de fumble, le groupe meurt et le scénario s'arrête
+ - en cas d'échec, la rencontre se relance avec une amélioration de 15% sur les résultats pour l'expérience acquise sur cette rencontre
+ - en cas de 2 échecs successifs, le groupe meurt et le scénario s'arrête
+ - si 4 échecs successifs ou non arrivent, le groupe meurt et le scénario s'arrête
+ - en cas de succès, on passe à la rencontre suivante
+ - en cas de succès critique, le groupe trouve une potion de soin qui permet de décrémenter le compte total d'échecs; ce compte ne peut être négatif
+
+## Modélisation UML - Projet Black Bunny
 
 L'application de réservation pour le bar à jeux "Black Bunny" est conçue pour offrir une expérience utilisateur optimale tant pour les clients que pour le personnel administratif.
 
 Centrée autour de la gestion flexible des tables et des salles, l'application prend en compte les spécificités des réservations, y compris les réservations de jeux, en garantissant un traitement adapté pour les jeux experts.
 Les clients peuvent réserver à l'avance selon des créneaux prédéfinis, avec des vérifications automatiques pour éviter les doubles réservations ou les réservations consécutives.
 
-## Gestion des salles
+### Gestion des salles
 
-### Configuration des salles
+#### Configuration des salles
 
 Ajout, suppression, et modification des salles.
 Chaque salle possède un identifiant unique et un nom.
 
 _Exemple_ : Salle 1 - "Salon Principal", Salle 2 - "Espace Jeux".
 
-### Association tables-salles
+#### Association tables-salles
 Ajout ou modification d'une table pour spécifier sa salle.
 Le système permet d'associer des types de tables spécifiques à des salles.
 
 _Exemple_ : Dans "Salon Principal", 3 tables de 4 et 2 tables de 6. Dans "Espace Jeux", 2 tables de 2, 1 table de 4, et 1 table de 8.
 
-## Gestion des jeux
+### Gestion des jeux
 
 Ajout, suppression, et modification des jeux.
 Chaque jeu peut être classifié selon son type (enfant, famille, initié, expert, ambiance...). La liste des types pourra évoluer.
@@ -58,11 +102,11 @@ Les jeux experts nécessitent 2 places supplémentaires lors de la réservation 
 
 _Exemple_ : "Terraforming Mars" est un jeu expert de 2-5 joueurs. Si 5 personnes le réservent à 18h30, une table de 7 (5+2) sera nécessaire et devra être marquée comme occupée une heure de plus.
 
-## Réservation
+### Réservation
 
 Les horaires disponibles à la réservation sont définis par le personnel.
 
-### Demande de réservation
+#### Demande de réservation
 
 Le client ou un opérateur entre les informations du client nécessaires : nom, numéro de téléphone, e-mail, date, heure souhaitée de réservation, nombre de participants.
 
@@ -80,7 +124,7 @@ Dans le cas de la sélection d'un événement, le client ne pourra l'afficher qu
 
 Un animateur peut être réservé pour 1 ou 2 heures pour des occasions spéciales, comme un anniversaire ou du jeu de rôle (le client pourra saisir des détails dans un champ texte), si il n'est pas déjà attribué à une autre réservation validée ce jour ci. La réservation d'un animateur dédié à la table génère une demande d'acompte de 35€ par heure demandée.
 
-### Réservation automatique : proposition des créneaux
+#### Réservation automatique : proposition des créneaux
 
 Hors événements, pour des réservations de plus de 24h à l'avance, le système propose des créneaux de réservation aux clients et accepte leurs demandes de réservation automatiquement.
 
@@ -94,7 +138,7 @@ Une fois que le client accepte un créneau, la réservation est automatiquement 
 
 Pour les événements, si il reste des places, le système accepte la demande automatiquement.
 
-### Confirmation de la réservation
+#### Confirmation de la réservation
 
 Une fois la demande de réservation acceptée, le client doit confirmer sa réservation.
 
@@ -112,13 +156,13 @@ Les dépots de caution et d'acompte se passent via Stripe.
 
 Si la réservation n'a pas été confirmée dans les 30min, un email/sms de relance est envoyé automatiquement.
 
-### Retard
+#### Retard
 
 Après 15min de retard, un sms de rappel de réservation est envoyé.
 
 Si le groupe du client est en retard, il a la possibilité de repousser sa réservation jusqu'à 30 minutes après l'heure de réservation en utilisant le lien généré pour la confirmation.
 
-### Annulation
+#### Annulation
 
 Si la réservation n'est pas confirmée 30min après la 1e relance, ou 1h avant la réservation, la réservation est annulée automatiquement.
 
@@ -134,7 +178,6 @@ Dans tous les cas d'annulation, le client reçoit un email/sms les informant de 
 
 Dans le cas des acomptes, ils seront toujours conservés.
 
-### Réservation honnorée
+#### Réservation honnorée
 
 Quand le client arrive, l'opérateur marque la réservation en "placé" et en "terminée" à son départ, en ayant la possibilité de noter un commentaire.
-
