@@ -12,6 +12,7 @@ Pour déposer vos développements et livrables en général, vous devez suivre l
   - [D42 - Consolidation des connaissances en informatique](D42_Consolidation_info/README.md)
   - [AD24 - Modélisation UML](AD24_Modelisation_POO/README.md)
   - [D70 - Git - Versioning](D70_Git/README.md)
+  - [D46 - Php / Design patterns](D46_Design_Pattern_Php/README.md)
 
 ## Documentation
 

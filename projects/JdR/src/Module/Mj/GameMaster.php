@@ -32,10 +32,37 @@ class GameMaster
         ;
     }
 
+    private function applyOutcome(Party $party, Outcome $outcome) : bool
+    {
+        switch ($outcome) {
+
+            case Outcome::FUMBLE:
+                $this->announce(sprintf("> 💀 fumble 💀 (%s)", $score));
+                $party->kill();
+
+                return false;
+
+            case Outcome::FAILURE:
+                $this->announce(sprintf("> 🔥 failure 🔥 (%s)", $score));
+                $party->hurt();
+
+                return false;
+
+            case Outcome::SUCCESS:
+                $this->announce(sprintf("> ✨ success ✨ (%s)", $score));
+
+                return true;
+
+            case Outcome::CRITICAL:
+                $this->announce(sprintf("> ⚡️ critical success ⚡️ (%s)", $score));
+                $party->heal();
+
+                return true;
+        }
+    }
+
     public function entertainParty(Party $party, Scenario $scenario)
     {
-        $encounters = $scenario->play();
-
         foreach ($scenario->play() as $encounter) {
             if (!$party->isAlive()) {
                 break;
@@ -52,26 +79,8 @@ class GameMaster
                     $score = $this->pleaseGiveMeACrit() + $currentTry * Encounter::EXPE_BUFF
                 );
 
-                switch ($outcome) {
-
-                    case Outcome::FUMBLE:
-                        $this->announce(sprintf("> 💀 fumble 💀 (%s)", $score));
-                        $party->kill();
-                        break 2;  // break switch and loop
-
-                    case Outcome::FAILURE:
-                        $this->announce(sprintf("> 🔥 failure 🔥 (%s)", $score));
-                        $party->hurt();
-                        break;
-
-                    case Outcome::SUCCESS:
-                        $this->announce(sprintf("> ✨ success ✨ (%s)", $score));
-                        break 2;    // move to next Encounter
-
-                    case Outcome::CRITICAL:
-                        $this->announce(sprintf("> ⚡️ critical success ⚡️ (%s)", $score));
-                        $party->heal();
-                        break 2;
+                if ($this->applyOutcome($party, $outcome)) {
+                    break;
                 }
 
                 // too much failures
