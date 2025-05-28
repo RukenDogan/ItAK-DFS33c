@@ -2,9 +2,9 @@
 
 namespace Lib\ValueObject;
 
-final class PositiveInt
+final readonly class PositiveInt
 {
-    public private(set) int $value;
+    public int $value;
 
     public function __construct(int|PositiveInt $value)
     {
