@@ -9,13 +9,7 @@ Pour installer et lancez le projet, suivez la [documentation](../projects/JdR/) 
 
 Le principe Open / Closed stipule qu'un objet doit gérer lui-même ses changements d'états, sans le déléguer à une classes externe.
 
-<table>
-<tr>
-<th>Exemple :</th>
-<th>Devient : </th>
-</tr>
-<tr>
-<td>
+Exemple :
 ```php
 class Character
 {
@@ -42,8 +36,7 @@ class Character
     }
 }
 ```
-</td>
-<td>
+Devient :
 ```php
 class Character
 {
@@ -77,14 +70,15 @@ class Character
     }
 }
 ```
-</td>
-</tr>
-</table>
 
-Complétez la classe Character pour intégrer la gestion de l'équipement et du niveau; un personnage pour s'équiper d'un Equipement et monter de niveau.
-Implémentez enfin une représentation de la puissance personnage : puissance = niveau + nb d'équipement - 1 pour chaque 2 blessures.
+Complétez la classe Character pour intégrer la gestion de l'équipement et du niveau; un personnage peut :
+ - s'équiper d'un ou plusieurs Equipements
+ - gagner des niveaux.
 
-Ajoutez une nouvelle règle : à chaque montée en niveau, le maximum de points de vie augmente de 1, et le personnage est soigné de 1.
+À chaque gain de niveau, le maximum de points de vie augmente de 1, et le personnage est soigné de 1.
+
+Implémentez enfin une représentation de la puissance personnage en la calculant comme suit : 
+`puissance = niveau + nb d'équipement - 1 pour chaque 2 points de vie manquants`
 
 ## Design Patterns
 
