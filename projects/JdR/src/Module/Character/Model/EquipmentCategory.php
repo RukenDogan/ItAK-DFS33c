@@ -1,6 +1,6 @@
 <?php
 
-namespace Module\Character;
+namespace Module\Character\Model;
 
 enum EquipmentCategory : string
 {

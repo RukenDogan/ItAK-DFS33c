@@ -1,6 +1,6 @@
 <?php
 
-namespace Module\Character;
+namespace Module\Character\Model;
 
 use Lib\ValueObject\PositiveInt;
 
@@ -32,7 +32,7 @@ class Character
 
     public int $power {
         get => max(
-            0,
+            0,   // cannot have negative power
             array_sum([
                 $this->level,
                 count($this->stuff),
@@ -91,13 +91,16 @@ class Character
 
     public function __toString() : string
     {
-        return sprintf(
-            "%slv.%s %s/%s♥️  %s💪",
-            str_pad($this->name, 12),
-            str_pad($this->level, 2),
-            str_pad($this->currentHealth, 2, ' ', STR_PAD_LEFT),
-            $this->maxHealth,
-            str_pad($this->power, 2, ' ', STR_PAD_LEFT)
-        );
+        return $this->isAlive() ?
+            sprintf(
+                "%s lv.%s %s/%s♥️  %s💪",
+                str_pad($this->name, 16),
+                str_pad($this->level, 2),
+                str_pad($this->currentHealth, 2, ' ', STR_PAD_LEFT),
+                $this->maxHealth,
+                str_pad($this->power, 2, ' ', STR_PAD_LEFT)
+            ) :
+            str_pad(sprintf("%s 💀", str_pad($this->name, 18)), 37)
+        ;
     }
 }
