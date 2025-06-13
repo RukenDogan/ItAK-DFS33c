@@ -52,7 +52,7 @@ class Constat
     public function __construct(
         public Vehicule $vehicule1,
         public Vehicule $vehicule2,
-    )
+    ) {}
 }
 
 interface Soda

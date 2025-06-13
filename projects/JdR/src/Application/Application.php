@@ -50,6 +50,15 @@ class Application
 
     public function run($script, ?int $nbRuns = self::DEFAULT_NB_RUNS)
     {
+<<<<<<< HEAD
+=======
+
+
+
+        
+        $nbRolls = $argv[1] ?? self::DEFAULT_NB_RUNS;
+
+>>>>>>> b13a4f7 (WIP: modifications en cours)
         try {
             var_dump($this->dataDir);
 

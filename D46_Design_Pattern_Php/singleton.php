@@ -1,8 +1,4 @@
 <?php
-
-
-// new Singleton;
-
 // $objet->.....
 // Class::
 
