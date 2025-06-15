@@ -24,7 +24,7 @@ final readonly class PositiveInt
         $this->value = $value;
     }
 
-    public function equals(self $other) : bool
+    public function equals(self $other): bool
     {
         return $other->value === $this->value;
     }

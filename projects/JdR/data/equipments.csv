@@ -1,0 +1,23 @@
+category,name,required_level,strength,intelligence,agility,vitality,charisma
+Arme,Épée de la Mauvaise Foi,3,2,,,,-1
+Armure,Armure de Plaques Administratives,5,,,-3,4,
+Accessoire,Chaussettes du Sorcier Dépressif,2,,4,,,-3
+Accessoire,Amulette Dunning-Kruger,4,,2,,,-2
+Consommable,Potion de Boule de Feu Mentale,1,,5,,,-5,
+Arme,Fléau d’Armes anti-moustiques,2,2,,-2,,,
+Armure,Slip en mithril odorant,1,,,,1,-4
+Armure,Casque du Bourrin Inconscient,6,5,-6,,,,
+Arme,Marteau des Réunions Inutiles,4,3,-1,,,-1
+Accessoire,Broche du Pal'Has-Been,2,,,,1,-2
+Arme,Lance-Répliques Sarcastiques,3,1,2,,,1
+Consommable,Gelée de Gobelin Rance,1,-1,,2,-2,,
+Armure,Cape en fourrure de Yack Timide,2,,,1,2,-1
+Accessoire,Lunettes de Vue Intérieure,3,3,,,,-1
+Consommable,Liqueur de Cultiste Masochiste,1,1,-2,-1,3,,
+Arme,Hache du Compensé Émotionnel,4,4,-2,,,,
+Armure,Cotte de Mailles,5,,,-2,3,-1
+Accessoire,Bracelet de Motivation Aléatoire,2,,1,1,,1
+Consommable,Potion taurine de Vigueur,3,,-2,,5,5
+Arme,Bâton de Soporifique Bavard,2,,2,,-1,-2
+Armure,Plastron de l'Assureur Fantôme,4,,1,-1,2,,
+Consommable,Sucette de l'Illusion de Puissance,1,2,-1,,,-1
